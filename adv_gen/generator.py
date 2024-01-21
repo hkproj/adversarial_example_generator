@@ -8,7 +8,7 @@ class AdversarialExampleGenerator:
             Initializes the generator with a model, epsilon, alpha, and loss function.
 
             Args:
-                model: The model to generate adversarial examples for.
+                model: The Torch model to generate adversarial examples for.
                 epsilon: The amount of perturbation. Defaults to 0.25.
                 alpha: The step size for the iterative method. Defaults to 0.025.
                 loss_fn: The loss function to use when generating the adversarial example. Defaults to nn.CrossEntropyLoss().
