@@ -40,14 +40,15 @@ class AdversarialExampleGenerator:
         
         # Make sure the model is in evaluation mode
         assert self.model.training == False, "Model should be in evaluation mode"
-        # Create a copy of the input tensor so that we don't affect the original
+        # Make sure the target class is an integer
         assert type(target_class) == int, "Target class must be an integer"
 
+        # Create a copy of the input tensor so that we don't affect the original
         x_adv_prev_step = torch.tensor(input.data, requires_grad=True)
         for _ in range(num_steps):
             output = self.model(x_adv_prev_step)
 
-            # Since the output is a probability distribution, the target class must be within the bounds of the output
+            # Since the output are logits among N classes, the target class must be within N
             _, num_classes = output.shape
             if target_class >= num_classes:
                 raise ValueError("Target class must be within bounds of the model output")
